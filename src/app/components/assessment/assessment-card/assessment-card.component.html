@@ -5,18 +5,40 @@
   </mat-card-header>
   <p>Last modified on {{ assessment.dateModified }}</p>
   <p>Total marks : {{ assessment.maxMarks }}</p>
+  <mat-chip-list>
+    <mat-chip
+      *ngFor="let tag of assessment.tags"
+      (click)="searchByTag($event, tag)"
+      >{{ tag.name }}
+    </mat-chip>
+  </mat-chip-list>
   <div class="buttons">
-    <button mat-raised-button color="warn" (click)="deleteAssessment($event)" class="delete-bu">
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="deleteAssessment($event)"
+      class="delete-bu"
+    >
       Delete
       <mat-icon>close</mat-icon>
     </button>
-    <button mat-raised-button color="primary" class="edit-bu" (click)="editAssessment($event)">
+    <button
+      mat-raised-button
+      color="primary"
+      class="edit-bu"
+      (click)="editAssessment($event)"
+    >
       Edit
       <mat-icon>drive_file_rename_outline</mat-icon>
     </button>
-    <button mat-raised-button color="primary" class="score-bu" (click)="viewScores($event)">
-        Scores
-        <mat-icon>credit_score</mat-icon>
-      </button>
+    <button
+      mat-raised-button
+      color="primary"
+      class="score-bu"
+      (click)="viewScores($event)"
+    >
+      Scores
+      <mat-icon>credit_score</mat-icon>
+    </button>
   </div>
 </mat-card>

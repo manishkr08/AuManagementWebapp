@@ -13,7 +13,8 @@ import { AssessmentService } from 'src/app/service/assessment/assessment.service
 export class AssessmentScoreComponent implements OnInit {
   assessment: Assessment = {};
   results: AssessmentResult[] = [];
-  average = 50;
+  average = 0;
+  percentage = 0;
 
   constructor(
     private assessmentService: AssessmentService,
@@ -42,6 +43,7 @@ export class AssessmentScoreComponent implements OnInit {
     }, 0);
 
     this.average = (sum / resultCount);
+    this.percentage = this.average * 100 / JSON.parse(JSON.stringify(maxMarks));
     this.average = JSON.parse(this.average.toFixed(2));
 
   }

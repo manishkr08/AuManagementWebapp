@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Assessment from 'src/app/model/Assessment';
 import Course from 'src/app/model/Course';
+import CreateAssessmentMode from 'src/app/model/enums/CreateAssessmentMode';
 import Skill from 'src/app/model/Skill';
 import Tag from 'src/app/model/Tag';
 import { CourseService } from 'src/app/service/course/course.service';
@@ -22,6 +23,7 @@ export class CreateAssessmentComponent implements OnInit {
   tags: Tag[] = [];
   skills: Skill[] = [];
   curAssessment: Assessment = {};
+  createAssessmentMode: CreateAssessmentMode = CreateAssessmentMode.NEW;
 
   createAssessmentForm = new FormGroup({
     name: new FormControl('', [
@@ -36,7 +38,7 @@ export class CreateAssessmentComponent implements OnInit {
     ]),
     course: new FormControl('', [Validators.required]),
     type: new FormControl('', [Validators.required]),
-    tags: new FormControl('', [Validators.required]),
+    tags: new FormControl('', []),
     maxMarks: new FormControl('', [
       Validators.required,
       Validators.min(10),
@@ -79,15 +81,18 @@ export class CreateAssessmentComponent implements OnInit {
         this.createAssessmentService.setAssessment({
           id: 0,
           tags: [],
-          version: 1,
           prerequisite: [],
         });
 
         // in case of modify
       } else {
-        console.log(this.curAssessment);
         this.fillFormValuesForEdit();
       }
+    });
+
+    // mode weather its edit or new
+    this.createAssessmentService.getCreateAssessmentMode().subscribe((data) => {
+      this.createAssessmentMode = data;
     });
   }
 
@@ -99,17 +104,15 @@ export class CreateAssessmentComponent implements OnInit {
     this.createAssessmentForm
       .get('course')
       ?.setValue(this.curAssessment.course?.name);
-    this.createAssessmentForm.get('type')?.setValue("1");
+    this.createAssessmentForm.get('type')?.setValue('0');
     this.createAssessmentForm
       .get('maxMarks')
       ?.setValue(this.curAssessment.maxMarks);
-    this.curAssessment.tags = [{ id: 1, name: 'Abc' }];
   }
 
   addTagToAssessment(event: Event) {
     const tagFormControl = this.createAssessmentForm.get('tags');
     const value = tagFormControl?.value;
-    console.log(value);
 
     // if selected is not emplty or not aleady slected
     if (
@@ -119,14 +122,11 @@ export class CreateAssessmentComponent implements OnInit {
       const tag = this.tags.filter((tag) => tag.name === value);
       this.curAssessment.tags?.push(tag[0]);
     }
-
-    console.log(this.curAssessment);
   }
 
   addSkillToAssessment(event: Event) {
     const skillFormControl = this.createAssessmentForm.get('skills');
     const value = skillFormControl?.value;
-    console.log(value);
 
     // if selected is not emplty or not aleady slected
     if (
@@ -136,7 +136,6 @@ export class CreateAssessmentComponent implements OnInit {
       const skill = this.skills.filter((skill) => skill.name === value);
       this.curAssessment.prerequisite?.push(skill[0]);
     }
-    console.log(this.curAssessment);
   }
 
   selectCourseForAssessment() {
@@ -148,7 +147,28 @@ export class CreateAssessmentComponent implements OnInit {
   }
 
   cancelCreateAssessment(event: Event) {
-    this.router.navigate(['app/assessment']);
+    // confirmation for cancelling form
+    Swal.fire({
+      title: 'Cancel create assessment ?',
+      showCancelButton: true,
+      confirmButtonText: `Confirm`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.router.navigate(['app/assessment']);
+      }
+    });
+  }
+
+  removeChipFromSelectedTag(event: Event, tag: Tag) {
+    this.curAssessment.tags = this.curAssessment.tags?.filter(
+      (data) => data.id !== tag.id
+    );
+  }
+
+  removeChipFromSelectedSkill(event: Event, skill: Skill) {
+    this.curAssessment.prerequisite = this.curAssessment.prerequisite?.filter(
+      (data) => data.id !== skill.id
+    );
   }
 
   submitCreateAssessment(event: Event) {
@@ -163,47 +183,62 @@ export class CreateAssessmentComponent implements OnInit {
       return;
     }
 
-    // fill values in assessment object
-    //name
-    this.curAssessment.name = this.createAssessmentForm.get('name')?.value;
-    // description
-    this.curAssessment.description = this.createAssessmentForm.get(
-      'description'
-    )?.value;
-    // type
-    this.curAssessment.type = this.createAssessmentForm.get('type')?.value;
-    // course
-    this.selectCourseForAssessment();
-    // current user id
-    this.curAssessment.creatorId = this.userService.getCurrentUser().id;
-    // maximum marks
-    this.curAssessment.maxMarks = this.createAssessmentForm.get(
-      'maxMarks'
-    )?.value;
-    // date created
-    if (!this.curAssessment.dateCreated) {
-      this.curAssessment.dateCreated = new Date(Date.now());
-    }
-    // date modified
-    this.curAssessment.dateModified = new Date(Date.now());
+    Swal.fire({
+      title: 'Confirm ?',
+      showCancelButton: true,
+      confirmButtonText: `Confirm`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // fill values in assessment object
+        //name
+        this.curAssessment.name = this.createAssessmentForm.get('name')?.value;
+        // description
+        this.curAssessment.description = this.createAssessmentForm.get(
+          'description'
+        )?.value;
+        // type
+        this.curAssessment.type = this.createAssessmentForm.get('type')?.value;
+        // course
+        this.selectCourseForAssessment();
+        // current user id
+        this.curAssessment.creatorId = this.userService.getCurrentUser().id;
+        // maximum marks
+        this.curAssessment.maxMarks = this.createAssessmentForm.get(
+          'maxMarks'
+        )?.value;
+        // date created
+        if (!this.curAssessment.dateCreated) {
+          this.curAssessment.dateCreated = new Date(Date.now());
+        }
+        // date modified
+        this.curAssessment.dateModified = new Date(Date.now());
 
-    console.log(this.curAssessment);
-    this.createAssessmentService.setAssessment(this.curAssessment);
-    this.createAssessmentService.createAssessment().subscribe((data) => {
-      Swal.fire({
-        icon: data.success ? 'success' : 'error',
-        title: data.success ? 'Success' : 'Error',
-        text: data.message,
-      });
+        this.createAssessmentService.setAssessment(this.curAssessment);
 
-      this.createAssessmentForm.reset();
-      if (this.curAssessment.tags === undefined) {
-        this.createAssessmentService.setAssessment({
-          id: 0,
-          tags: [],
-          version: 1,
-          prerequisite: [],
-        });
+        // if save mode or edit mode
+        if (this.createAssessmentMode === CreateAssessmentMode.NEW) {
+          this.createAssessmentService.createAssessment().subscribe((data) => {
+            Swal.fire({
+              icon: data.success ? 'success' : 'error',
+              title: data.success ? 'Success' : 'Error',
+              text: data.message,
+            });
+          });
+
+          // if it is edit
+        } else {
+          this.createAssessmentService.editAssessment().subscribe((data) => {
+            Swal.fire({
+              icon: data.success ? 'success' : 'error',
+              title: data.success ? 'Success' : 'Error',
+              text: data.message,
+            });
+          });
+        }
+
+        this.createAssessmentForm.reset();
+        this.createAssessmentService.setAssessment({});
+        this.router.navigate(['app/assessment']);
       }
     });
   }

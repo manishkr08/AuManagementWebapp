@@ -52,9 +52,13 @@ export class AssessmentService {
 
   filterByQuery(query: string) {
     query = query.toLowerCase();
-    const filteredValue = this.allAssessment.filter((as) =>
-      as.name?.toLowerCase().includes(query)
-    );
+    const filteredValue = this.allAssessment.filter((as) => {
+      return (
+        as.name?.toLowerCase().includes(query) ||
+        as.tags?.some((tag) => tag.name?.toLocaleLowerCase().includes(query))
+      );
+    });
+
     this.allAssessmentBS.next(filteredValue);
   }
 

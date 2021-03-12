@@ -34,11 +34,11 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>
+        <button mat-menu-item (click)="goToProfile($event)">
           <mat-icon>face</mat-icon>
           <span>View Profile</span>
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item (click)="logout($event)">
           <mat-icon>logout</mat-icon>
           <span>Logout</span>
         </button>

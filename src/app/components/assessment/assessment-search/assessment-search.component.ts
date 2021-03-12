@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import Assessment from 'src/app/model/Assessment';
+import CreateAssessmentMode from 'src/app/model/enums/CreateAssessmentMode';
+import Tag from 'src/app/model/Tag';
 import { AssessmentService } from 'src/app/service/assessment/assessment.service';
 import { CreateAssessmentService } from '../create-assessment/create-assessment.service';
 
@@ -17,7 +19,7 @@ export class AssessmentSearchComponent implements OnInit {
   constructor(
     private router: Router,
     private assessmentService: AssessmentService,
-    private createAssessmentService : CreateAssessmentService
+    private createAssessmentService: CreateAssessmentService
   ) {}
 
   ngOnInit(): void {
@@ -33,6 +35,16 @@ export class AssessmentSearchComponent implements OnInit {
 
   navigateToAssessment(event: Event) {
     this.createAssessmentService.setAssessment({});
+    this.createAssessmentService.setCreateAssessmentMode(CreateAssessmentMode.NEW)
     this.router.navigate(['app/assessment/create']);
+  }
+
+  searchTag(event: Tag) {
+    console.log(event);
+    this.searchQuery.setValue(event.name);
+  }
+
+  clearSearchQuery(event: Event) {
+    this.searchQuery.setValue('');
   }
 }

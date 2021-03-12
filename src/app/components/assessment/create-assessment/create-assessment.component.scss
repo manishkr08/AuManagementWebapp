@@ -37,6 +37,7 @@ form {
 
 .tags-chips, .skills-chips {
     margin: 20px 10px 30px 10px;
+    color: #202020;
 }
 
 .submit-bu {
@@ -44,4 +45,11 @@ form {
     .cancel {
         margin-right: 20px;
     }
+}
+
+mat-chip {
+  mat-icon {
+    font-size: 18px;
+    margin: auto auto auto 3px;
+  }
 }

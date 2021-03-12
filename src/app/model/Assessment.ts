@@ -11,7 +11,6 @@ export default class Assessment {
   course?: Course;
   creatorId?: number;
   maxMarks?: number;
-  version?: number;
   tags?: Tag[];
   dateCreated?: Date;
   dateModified?: Date;

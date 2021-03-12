@@ -1,11 +1,19 @@
 <div class="search-bar">
   <mat-form-field appearance="outline">
     <mat-label>Search</mat-label>
-    <input matInput placeholder="Type to search assessment" [formControl]="searchQuery"/>
+    <input
+      matInput
+      placeholder="Type to search assessment"
+      [formControl]="searchQuery"
+    />
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
 
   <div class="buttons">
+    <button mat-raised-button color="warn" (click)="clearSearchQuery($event)">
+      Clear Search
+      <mat-icon>close</mat-icon>
+    </button>
     <button
       mat-raised-button
       color="accent"
@@ -19,6 +27,7 @@
 
 <div class="assessments">
   <app-assessment-card
+    (searchTag)="searchTag($event)"
     *ngFor="let assessment of assessments"
     [assessment]="assessment"
   ></app-assessment-card>
