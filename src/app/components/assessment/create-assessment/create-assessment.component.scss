@@ -1,0 +1,47 @@
+form {
+  padding: 50px;
+}
+
+.name,
+.description {
+  mat-form-field {
+    max-width: 500px;
+    width: 100%;
+  }
+}
+
+.course,
+.tags-select,
+.skills-select {
+  mat-form-field {
+    max-width: 488px;
+    width: 100%;
+  }
+}
+
+.type {
+  margin: 20px 0px;
+
+  p {
+    margin-bottom: 20px;
+  }
+
+  mat-radio-button {
+    margin: 0px 20px;
+  }
+}
+
+.add-tag-bu, .add-skill-bu {
+  margin-top: 10px;
+}
+
+.tags-chips, .skills-chips {
+    margin: 20px 10px 30px 10px;
+}
+
+.submit-bu {
+    margin-top: 20px;
+    .cancel {
+        margin-right: 20px;
+    }
+}

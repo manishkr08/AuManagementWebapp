@@ -1,0 +1,29 @@
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    height: max-content;
+  }
+}
+
+.total-marks {
+  margin: 30px 0px;
+  font-size: 30px;
+}
+
+
+.scores {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+app-score-card {
+  width: 45% ;
+}
+
+mat-progress-bar {
+  margin-bottom: 20px;
+}

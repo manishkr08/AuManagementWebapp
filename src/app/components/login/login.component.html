@@ -1,0 +1,39 @@
+<div class="main-container">
+  <mat-card>
+    <!-- headin -->
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+      <mat-card-subtitle>Login using Email Id or Google</mat-card-subtitle>
+    </mat-card-header>
+
+    <!-- login form -->
+    <form [formGroup]="loginForm">
+      <!-- username -->
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Enter you email" type="email" formControlName="email" />
+        <mat-icon matSuffix>face</mat-icon>
+        <mat-error>Valid email required</mat-error>
+      </mat-form-field>
+
+      <!-- password -->
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="Enter Password" type="password" formControlName="password"/>
+        <mat-icon matSuffix>vpn_key</mat-icon>
+        <mat-error>Required ( 4 <= lenght <= 30 )</mat-error>
+      </mat-form-field>
+
+      <!-- login button -->
+      <div class="buttons">
+        <button mat-raised-button color="primary" type="submit" (click)="login($event)">
+          Login
+        </button>
+
+        <!-- register button -->
+        <button mat-raised-button color="accent" (click)="navigateToRegister($event)">Register</button>
+      </div>
+      <button mat-stroked-button color="primary" (click)="loginViaGoogle($event)">Sign via google</button>
+    </form>
+  </mat-card>
+</div>

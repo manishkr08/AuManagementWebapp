@@ -1,0 +1,25 @@
+<div class="search-bar">
+  <mat-form-field appearance="outline">
+    <mat-label>Search</mat-label>
+    <input matInput placeholder="Type to search assessment" [formControl]="searchQuery"/>
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  <div class="buttons">
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="navigateToAssessment($event)"
+    >
+      Create
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>
+
+<div class="assessments">
+  <app-assessment-card
+    *ngFor="let assessment of assessments"
+    [assessment]="assessment"
+  ></app-assessment-card>
+</div>

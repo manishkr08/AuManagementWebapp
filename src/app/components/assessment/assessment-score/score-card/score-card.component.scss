@@ -1,0 +1,23 @@
+.info {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .name {
+    font-size: 20px;
+  }
+  
+  .marks {
+    margin-bottom: 20px;
+    font-size: 40px;
+  }
+  
+  .feedback-bu {
+    margin: 20px auto;
+    display: flex;
+    justify-content:center;
+  }
+
+  mat-card {
+    margin: 20px;
+  }

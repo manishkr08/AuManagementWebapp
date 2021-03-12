@@ -1,0 +1,21 @@
+.search-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.buttons {
+    button {
+        margin: 0px 10px;
+    }
+}
+
+.tag-bar {
+    display: none;
+}
+
+.assessments {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}

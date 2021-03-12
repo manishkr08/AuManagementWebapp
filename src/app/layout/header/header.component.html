@@ -1,0 +1,48 @@
+<header>
+  <div class="container">
+    <!-- logo -->
+    <div id="logo">
+      <img src="assets/logo.png" alt="" />
+      <p>AU portal</p>
+    </div>
+
+    <!-- navigation  -->
+    <nav>
+      <ul>
+        <li><a routerLink="home">Home</a></li>
+        <li><a routerLink="opportunities">Opportunities</a></li>
+        <li><a routerLink="candidate">Candidates</a></li>
+        <li><a routerLink="course">Course</a></li>
+        <li><a routerLink="assessment">Assessment</a></li>
+        <li><a routerLink="onboarding">Onboarding</a></li>
+      </ul>
+    </nav>
+
+    <!-- Right menu  -->
+    <div class="right-menu">
+      <p>{{ userName }}</p>
+      <div class="avatar">
+        <img
+          src="assets/default_male.png"
+        />
+      </div>
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        aria-label="Example icon-button with a menu"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>face</mat-icon>
+          <span>View Profile</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</header>

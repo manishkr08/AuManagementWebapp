@@ -1,0 +1,18 @@
+<mat-card>
+    <!-- icon -->
+    <div class="icon">
+      <mat-icon>{{ card.icon }}</mat-icon>
+    </div>
+  
+    <!-- title & description -->
+    <mat-card-title>{{ card.name }}</mat-card-title>
+    <mat-card-subtitle>{{ card.description }}</mat-card-subtitle>
+  
+    <!-- buttons -->
+    <mat-card-actions>
+      <button mat-stroked-button color="primary" (click)="goToPage($event)">
+        Go to {{ card.name }} <span><mat-icon>arrow_right_alt</mat-icon></span>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  

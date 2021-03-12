@@ -1,0 +1,22 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ assessment.name }}</mat-card-title>
+    <mat-card-subtitle>{{ assessment.description }}</mat-card-subtitle>
+  </mat-card-header>
+  <p>Last modified on {{ assessment.dateModified }}</p>
+  <p>Total marks : {{ assessment.maxMarks }}</p>
+  <div class="buttons">
+    <button mat-raised-button color="warn" (click)="deleteAssessment($event)" class="delete-bu">
+      Delete
+      <mat-icon>close</mat-icon>
+    </button>
+    <button mat-raised-button color="primary" class="edit-bu" (click)="editAssessment($event)">
+      Edit
+      <mat-icon>drive_file_rename_outline</mat-icon>
+    </button>
+    <button mat-raised-button color="primary" class="score-bu" (click)="viewScores($event)">
+        Scores
+        <mat-icon>credit_score</mat-icon>
+      </button>
+  </div>
+</mat-card>

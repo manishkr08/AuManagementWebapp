@@ -1,0 +1,36 @@
+mat-card {
+    width: 300px;
+    height: 170px;
+    margin: 10px;
+    background-color: #f4f4f4;
+}
+
+mat-card:hover {
+    background-color: #f0f0f0;
+}
+
+.icon {
+    text-align: center;
+    mat-icon {
+        font-size: 40px;
+        color: #404040;
+    }
+}
+
+mat-card-title, mat-card-subtitle {
+    width: 100%;
+    text-align: center;
+}
+
+button {
+    width: 100%;
+    font-size: 17px;
+}
+
+mat-card-actions {
+    margin: 15px;
+}
+
+button mat-icon {
+    padding-top: 10px;
+}

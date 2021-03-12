@@ -1,0 +1,67 @@
+<div class="main-container">
+  <mat-card>
+    <!-- headin -->
+    <mat-card-header>
+      <mat-card-title>Register</mat-card-title>
+      <mat-card-subtitle>Register using Email Id</mat-card-subtitle>
+    </mat-card-header>
+
+    <!-- login form -->
+    <form [formGroup]="registerForm">
+      <!-- First name -->
+      <mat-form-field appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input matInput placeholder="Enter first name" type="text" formControlName="firstName"/>
+        <mat-icon matSuffix>face</mat-icon>
+        <mat-error>Required, ( length <= 50 )</mat-error>
+      </mat-form-field>
+
+      <!-- last name  -->
+      <mat-form-field appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="Enter last name" type="text" formControlName="lastName"/>
+        <mat-icon matSuffix>drive_file_rename_outline</mat-icon>
+        <mat-error>Required, ( length <= 50 )</mat-error>
+      </mat-form-field>
+
+      <!-- username -->
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Enter you email" type="email" formControlName="email"/>
+        <mat-icon matSuffix>local_post_office</mat-icon>
+        <mat-error>Required valid email</mat-error>
+      </mat-form-field>
+
+      <!-- password -->
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="Enter Password" type="password" formControlName="password"/>
+        <mat-icon matSuffix>vpn_key</mat-icon>
+        <mat-error>Required ( 4 <= length <= 30 )</mat-error>
+      </mat-form-field>
+
+      <!-- confirm password -->
+      <mat-form-field appearance="outline">
+        <mat-label>Confirm Password</mat-label>
+        <input matInput placeholder="Enter Password" type="password" formControlName="confirmPassword"/>
+        <mat-icon matSuffix>lock_open</mat-icon>
+        <mat-error>Required ( 4 <= length <= 30 )</mat-error>
+      </mat-form-field>
+
+      <!-- terms and condition checkbox -->
+      <mat-checkbox formControlName="checkTerms">Accept Terms and conditions</mat-checkbox>
+
+      <!-- Register button -->
+      <button mat-raised-button color="primary" type="submit" (click)="register($event)">
+        Sign Up
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="navigateToSignIn($event)"
+      >
+        Go to Sign in
+      </button>
+    </form>
+  </mat-card>
+</div>

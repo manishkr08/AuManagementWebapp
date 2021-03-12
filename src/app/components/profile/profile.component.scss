@@ -1,0 +1,19 @@
+mat-card {
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-icon {
+  position: relative;
+  font-size: 100px;
+  top: -50px;
+  left: -30px;
+}
+
+p {
+  margin-top: 30px;
+  font-size: 20px;
+}
